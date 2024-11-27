@@ -2,13 +2,27 @@ import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 
 
-export const AppDataSource = new DataSource({
-  type: 'mysql',
-  host: 'localhost',
-  port: 3306,
-  username:'root',
-  password: 'Dcs0132$$',
-  database: 'difusiones',
-  entities: ['src/infrastructure/models/*.ts'],
-});
+class DataSourceSingle  extends DataSource{
+  private static instance: DataSourceSingle;
+  private constructor(){
+    super({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username:'root',
+      password: '1234',
+      database: 'difusiones',
+      entities: ['src/infrastructure/models/*.ts'],
+    });
+  }
+  public static getInstance(): DataSourceSingle{
+    if(!DataSourceSingle.instance){
+      DataSourceSingle.instance = new DataSourceSingle();
+    }
+    return DataSourceSingle.instance;
+  }
+}
+export default DataSourceSingle;
+
+
 

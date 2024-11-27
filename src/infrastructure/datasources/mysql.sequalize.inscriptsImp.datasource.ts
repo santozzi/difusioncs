@@ -2,11 +2,14 @@ import UserDataSource from "../../domain/datasources/user.datasource";
 import User from "../../domain/entities/user.entity";
 import { userModelToUser, userToUserModel } from "../mappers/user.mapper";
 import { UserModel } from "../models/user.model";
-import { AppDataSource } from "./db/mysql.connection";
+import DataSourceSingle from "./db/mysql.connection";
+
+
 
 
 class MySqlInscriptosImpDatasource implements UserDataSource{
-    userRepository = AppDataSource.getRepository(UserModel);
+    datasource = DataSourceSingle.getInstance();
+    userRepository = this.datasource.getRepository(UserModel);
     
     
     
@@ -26,7 +29,7 @@ class MySqlInscriptosImpDatasource implements UserDataSource{
         throw new Error("Method not implemented.");
     }
     async addUser (inscripto: User): Promise<User> {
-        const newUser = this.userRepository.create(userToUserModel(inscripto)) as UserModel;
+        const newUser = this.userRepository.create(userToUserModel(inscripto));
       
         const user = await this.userRepository.save(newUser);
         console.log('Nuevo usuario creado:', newUser);

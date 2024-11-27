@@ -3,9 +3,11 @@ import "reflect-metadata"
 
 import MySqlInscriptosImpDatasource from "../infrastructure/datasources/mysql.sequalize.inscriptsImp.datasource";
 import UserRepository from "../infrastructure/repositories/user.repository";
-import { AppDataSource } from "../infrastructure/datasources/db/mysql.connection";
+import DataSourceSingle from "../infrastructure/datasources/db/mysql.connection";
 import { UserModel } from "../infrastructure/models/user.model";
-import { log } from "console";
+
+import { DataSource } from "typeorm";
+import Server from "./server";
 
 
 
@@ -30,10 +32,11 @@ console.log("Hola mundo");
       }); */
 
  const userRepository:UserRepository = new UserRepository(new MySqlInscriptosImpDatasource());
+ const datasource = DataSourceSingle.getInstance();
  const startApp = async () => {
   try {
     // Inicializa la conexión
-    await AppDataSource.initialize();
+    await datasource.initialize();
     console.log('Conexión a la base de datos establecida correctamente.');
 
     
@@ -41,11 +44,21 @@ console.log("Hola mundo");
     console.error('Error al conectar con la base de datos:', error); 
   }
 };
-
-startApp(); 
-userRepository.addUser(user).then((usuario:User) => {
+/* 
+startApp().then(() => {
+  console.log('Aplicación inicializada correctamente.');
+  userRepository.addUser(user).then((usuario:User) => {
   console.log(usuario);
 }).catch((error:Error) => {
   console.log(error);
 });
+}
+).catch((error) => {
+  console.error('Error al inicializar la aplicación:', error);
+}); */
+const server = new Server(3000);
+server.start(() => {
+  console.log('Servidor corriendo en el puerto 3000');
+});
+
 
