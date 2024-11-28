@@ -7,7 +7,7 @@ export class UserModel{
   private id: number;
 
   @Column()
-  private name: string;
+  public name: string;
 
   @Column({name: 'last_name',type:'varchar'})
   private lastName: string;

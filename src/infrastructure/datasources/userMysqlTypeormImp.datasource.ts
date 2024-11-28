@@ -7,7 +7,7 @@ import DataSourceSingle from "./db/mysql.connection";
 
 
 
-class MySqlInscriptosImpDatasource implements UserDataSource{
+class UserMysqlTypeormImpDatasource implements UserDataSource{
     datasource = DataSourceSingle.getInstance();
     userRepository = this.datasource.getRepository(UserModel);
     
@@ -50,4 +50,4 @@ class MySqlInscriptosImpDatasource implements UserDataSource{
 
     
 }
-export default MySqlInscriptosImpDatasource;
+export default UserMysqlTypeormImpDatasource;

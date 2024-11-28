@@ -1,7 +1,7 @@
 import User from "../domain/entities/user.entity";
 import "reflect-metadata"
 
-import MySqlInscriptosImpDatasource from "../infrastructure/datasources/mysql.sequalize.inscriptsImp.datasource";
+import UserMysqlTypeormImpDatasource from "../infrastructure/datasources/userMysqlTypeormImp.datasource";
 import UserRepository from "../infrastructure/repositories/user.repository";
 import DataSourceSingle from "../infrastructure/datasources/db/mysql.connection";
 import { UserModel } from "../infrastructure/models/user.model";
@@ -31,7 +31,7 @@ console.log("Hola mundo");
           console.log(error);
       }); */
 
- const userRepository:UserRepository = new UserRepository(new MySqlInscriptosImpDatasource());
+ const userRepository:UserRepository = new UserRepository(new UserMysqlTypeormImpDatasource());
  const datasource = DataSourceSingle.getInstance();
  const startApp = async () => {
   try {
