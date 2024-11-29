@@ -8,5 +8,6 @@ interface UserDataSource {
     addUser(inscripto: User): Promise<User>;
     deleteUser(id: number): Promise<void>;
     updateUser(inscripto: User): Promise<void>;
+    updateUserByDni(dni: string,user:User): Promise<void>;
 }
 export default UserDataSource;

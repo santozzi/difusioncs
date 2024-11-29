@@ -8,6 +8,7 @@ import { UserModel } from "../infrastructure/models/user.model";
 
 import { DataSource } from "typeorm";
 import Server from "./server";
+import { start } from "repl";
 
 
 
@@ -44,6 +45,14 @@ console.log("Hola mundo");
     console.error('Error al conectar con la base de datos:', error); 
   }
 };
+startApp().then(() => {
+  console.log('Aplicación inicializada correctamente.');
+  
+}).catch((error) => {
+  console.error('Error al inicializar la aplicación:', error);
+
+});
+
 /* 
 startApp().then(() => {
   console.log('Aplicación inicializada correctamente.');

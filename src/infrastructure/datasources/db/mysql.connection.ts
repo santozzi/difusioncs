@@ -10,7 +10,7 @@ class DataSourceSingle  extends DataSource{
       host: 'localhost',
       port: 3306,
       username:'root',
-      password: '1234',
+      password: 'Dcs0132$$',
       database: 'difusiones',
       entities: ['src/infrastructure/models/*.ts'],
     });

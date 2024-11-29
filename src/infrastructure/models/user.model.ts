@@ -4,7 +4,7 @@ import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColu
 @Entity('users')
 export class UserModel{
   @PrimaryGeneratedColumn()  
-  private id: number;
+  public id: number;
 
   @Column()
   public name: string;
@@ -12,7 +12,7 @@ export class UserModel{
   @Column({name: 'last_name',type:'varchar'})
   private lastName: string;
   @Column()
- private  dni: string;
+ public  dni: string;
 
   @Column()
   private email: string;
@@ -26,6 +26,9 @@ export class UserModel{
 
   @UpdateDateColumn({name: 'updated_at'})
   private readonly updatedAt?: Date
+  
+
+
 
   constructor(name: string, lastName: string, dni: string, email: string, phone: string, password: string, id: number = 0, createdAt: Date = new Date(), updatedAt: Date = new Date()) {
     this.id = id;
@@ -93,6 +96,7 @@ export class UserModel{
         }
         return this.updatedAt;
     }
+
 
 
   
